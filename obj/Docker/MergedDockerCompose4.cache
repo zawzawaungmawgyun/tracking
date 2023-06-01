@@ -1,0 +1,28 @@
+services:
+  sql:
+    container_name: sql_server2022
+    environment:
+      ACCEPT_EULA: "y"
+      SA_PASSWORD: P@ssw0rd10
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+    - published: 1433
+      target: 1433
+  tracking:
+    container_name: tracking_web_application
+    depends_on:
+      sql:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: tracking
+    ports:
+    - published: 5000
+      target: 80
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\Dell\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\Dell\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+version: '3.9'

@@ -1,0 +1,483 @@
+﻿<h4 class="header">Search by Serial Number</h4>
+<hr />
+<div class="container">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-2">
+                <input type="radio" id="rdoSerialNumber" name="optradio" checked> Serial Number
+            </div>
+            <div class="col-md-2">
+                <input type="radio" id="rdoDeviceName" name="optradio"> Device Name
+            </div>
+            <div class="col-md-2">
+                <input type="radio" id="rdoBrandName" name="optradio"> Brand Name
+            </div>
+            <div class="col-md-2">
+                <input type="radio" id="rdoIssue" name="optradio"> Issue
+            </div>
+            <div class="col-md-2">
+                <input type="radio" id="rdoIssueDate" name="optradio"> Issue Date
+            </div>
+            <div class="col-md-2"></div>
+        </div><br />
+        <div class="row" id="serial_row">
+            <label class="col-md-2 pt-1 control-label"><b>Serial Number</b></label>
+            <div class="col-md-3">
+                <input type="text" id="serialnumber" class="form-control" placeholder="Type Serial Number" />
+            </div>
+            <div class="col-md-1">
+                <input type="submit" class="btn btn-success" value="Search" style="width:100%;font-size:14px;" onclick="SerialSearch()" />
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+        <div class="row" id="device_row">
+            <label class="col-md-2 pt-1 control-label"><b>Device Name</b></label>
+            <div class="col-md-3 col-sm-12">
+                <select id="ddldevicename" class="dropdown form-control">
+                    <option value="">Choose Device</option>
+                </select>
+            </div>
+            <div class="col-md-1">
+                <input type="submit" class="btn btn-success" value="Search" style="width:100%;font-size:14px;" onclick="DeviceNameSearch()" />
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+        <div class="row" id="brand_row">
+            <label class="col-md-2 pt-1 control-label"><b>Brand Name</b></label>
+            <div class="col-md-3">
+                <input type="text" id="brandname" class="form-control" placeholder="Type Brand Name" />
+            </div>
+            <div class="col-md-1">
+                <input type="submit" class="btn btn-success" value="Search" style="width:100%;font-size:14px;" onclick="BrandNameSearch()" />
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+        <div class="row" id="issue_row">
+            <label class="col-md-2 pt-1 control-label"><b>Types of Issue</b></label>
+            <div class="col-md-3 col-sm-12">
+                <select id="ddlissue" class="dropdown form-control">
+                    <option value="">Choose Issue</option>
+                    <option value="HDD or SSD">HDD or SSD</option>
+                    <option value="HDD or SSD Cable">HDD or SSD Cable</option>
+                    <option value="RAM">RAM</option>
+                    <option value="Ram Slot">Ram Slot</option>
+                    <option value="Keyboard">Keyboard</option>
+                    <option value="Camera">Camera</option>
+                    <option value="Mic">Mic</option>
+                    <option value="Touch Pad">Touch Pad</option>
+                    <option value="CPU">CPU</option>
+                    <option value="Motherboard">Motherboard</option>
+                    <option value="LCD Panel">LCD Panel</option>
+                    <option value="LCD Panel Cable">LCD Panel Cable</option>
+                    <option value="Battery">Battery</option>
+                    <option value="Adapter">Adapter</option>
+                    <option value="BIOS Error">BIOS Error</option>
+                </select>
+            </div>
+            <div class="col-md-1">
+                <input type="submit" class="btn btn-success" value="Search" style="width:100%;font-size:14px;" onclick="IssueSearch()" />
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+        <div class="row" id="issuedate_row">
+            <label class="col-md-2 pt-1 pl-20 control-label pl-4"><b>From Date</b></label>
+            <div class="col-md-3 col-sm-12">
+                <input type="date" id="fromdate" class="form-control" />
+            </div>
+            <label class="col-md-1 pt-1 control-label"><b>To Date</b></label>
+            <div class="col-md-3 col-sm-12">
+                <input type="date" id="todate" class="form-control" />
+            </div>
+            <div class="col-md-1">
+                <input type="submit" class="btn btn-success" value="Search" style="width:100%;font-size:14px;" onclick="IssueDateSearch()" />
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div><br />
+
+    <table id="tblTracking" class="table table-striped table-bordered" style="width:100%;border-left: 1px solid lightgray;border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Unit Name</th>
+                <th>ICT Person</th>
+                <th>Device Name</th>
+                <th>Brand Name</th>
+                <th>Serial Number</th>
+                <th>Issue Date</th>
+                <th>Types of Issue</th>
+                <th>Solution Date by ICT</th>
+                <th>Solution Date by Service Center</th>
+                <th>Solution Details</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+
+    <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css" rel="stylesheet" />
+    @*  For Excel,CSV, Export button*@
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+
+    <link href="~/css/select2.css" rel="stylesheet" />
+    <link href="~/css/select2-bootstrap.css" rel="stylesheet" />
+    <script src="~/js/select2.js"></script>
+    <script>
+        $('#ddldevicename,#ddlissue').select2({
+            theme: 'bootstrap'
+        });
+        var header = $(".header");
+        $('#device_row').hide();
+        $('#brand_row').hide();
+        $('#issue_row').hide();
+        $('#issuedate_row').hide();
+        $("#rdoSerialNumber").click(function () {
+            if ($(this).is(':checked')) {
+                $('#serial_row').show();
+                $('#device_row').hide();
+                $('#brand_row').hide();
+                $('#issue_row').hide();
+                $('#issuedate_row').hide();
+                header.html("Search by Serial Number");
+            }
+        });
+        $("#rdoDeviceName").click(function () {
+            if ($(this).is(':checked')) {
+                $('#serial_row').hide();
+                $('#device_row').show();
+                $('#brand_row').hide();
+                $('#issue_row').hide();
+                $('#issuedate_row').hide();
+                header.html("Search by Device Name");
+            }
+        });
+        $("#rdoBrandName").click(function () {
+            if ($(this).is(':checked')) {
+                $('#serial_row').hide();
+                $('#device_row').hide();
+                $('#brand_row').show();
+                $('#issue_row').hide();
+                $('#issuedate_row').hide();
+                header.html("Search by Brand Name");
+            }
+        });
+        $("#rdoIssue").click(function () {
+            if ($(this).is(':checked')) {
+                $('#serial_row').hide();
+                $('#device_row').hide();
+                $('#brand_row').hide();
+                $('#issue_row').show();
+                $('#issuedate_row').hide();
+                header.html("Search by Issue");
+            }
+        });
+        $("#rdoIssueDate").click(function () {
+            if ($(this).is(':checked')) {
+                $('#serial_row').hide();
+                $('#device_row').hide();
+                $('#brand_row').hide();
+                $('#issue_row').hide();
+                $('#issuedate_row').show();
+                header.html("Search by Issue Date");
+            }
+        });
+
+        //For device_row
+        //Getting DeviceNames
+        $.ajax({
+            type: "GET",
+            url: "/Tracking/GetDeviceNames",
+            data: {},
+            success: function (data) {
+                $.each(data, function (i, d) {
+                    $("#ddldevicename").append($("<option></option>").val(d.deviceName).html(d.deviceName));
+                });
+            }
+        });
+        $(document).on("change", "#ddldevicename", function () {
+           var devicename = $("#ddldevicename").val();
+        });
+        
+        function SerialSearch() {
+            var SerialNumber = $("#serialnumber").val();
+            $.ajax({
+                type: "GET",
+                url: "/Tracking/GetTransactionbySerialNumber",
+                data: { SerialNumber: SerialNumber },
+                success: function (data) {
+                    $('#tblTracking').DataTable({
+                        destroy: true,
+                        dom: 'Bfrtip',
+                        responsive: true,
+                        "data": data,
+                        "columns": [
+                            { "data": "id" },
+                            { "data": "branchName" },
+                            { "data": "name" },
+                            { "data": "deviceName" },
+                            { "data": "brandName" },
+                            { "data": "serialNumber" },
+                            { "data": "modifiedIssueDate" },
+                            { "data": "typeOfIssue" },
+                            { "data": "modifiedSolutionDateICT" },
+                            { "data": "modifiedServiceCenter" },
+                            { "data": "solutionDetails" },
+                            { "data": "details" }
+                        ],
+                        'columnDefs': [
+                            {
+                                'targets': 11,
+                                'data': null,
+                                'searchable': false,
+                                'orderable': false,
+                                'className': 'dt-body-center',
+                                'defaultContent': '<button class="btn btn-warning">Details</button>',
+                            }
+                        ],
+                        select: {
+                            style: 'single',
+                            selector: 'td:first-child'
+                        },
+                        order: [[0, 'asc']],
+                    });
+                    $('#tblTracking tbody').on('click', 'button', function () {
+                        var row = $(this).closest("tr")[0];
+                        var id = row.cells[0].innerHTML;
+                        var url = "/Tracking/SDetails?Id=" + id;
+                        window.location.href = url;
+                    });
+                },
+                error: function (result) {
+                }
+            });
+        }
+
+        function DeviceNameSearch() {
+            var DeviceName = $("#ddldevicename").val();
+            $.ajax({
+                type: "GET",
+                url: "/Tracking/GetTransactionbyDeviceName",
+                data: { DeviceName: DeviceName },
+                success: function (data) {
+                    $('#tblTracking').DataTable({
+                        destroy: true,
+                        dom: 'Bfrtip',
+                        responsive: true,
+                        "data": data,
+                        "columns": [
+                            { "data": "id" },
+                            { "data": "branchName" },
+                            { "data": "name" },
+                            { "data": "deviceName" },
+                            { "data": "brandName" },
+                            { "data": "serialNumber" },
+                            { "data": "modifiedIssueDate" },
+                            { "data": "typeOfIssue" },
+                            { "data": "modifiedSolutionDateICT" },
+                            { "data": "modifiedServiceCenter" },
+                            { "data": "solutionDetails" },
+                            { "data": "details" }
+                        ],
+                        'columnDefs': [
+                            {
+                                'targets': 11,
+                                'data': null,
+                                'searchable': false,
+                                'orderable': false,
+                                'className': 'dt-body-center',
+                                'defaultContent': '<button class="btn btn-warning">Details</button>',
+                            }
+                        ],
+                        select: {
+                            style: 'single',
+                            selector: 'td:first-child'
+                        },
+                        order: [[0, 'asc']],
+                    });
+                    $('#tblTracking tbody').on('click', 'button', function () {
+                        var row = $(this).closest("tr")[0];
+                        var id = row.cells[0].innerHTML;
+                        var url = "/Tracking/SDetails?Id=" + id;
+                        window.location.href = url;
+                    });
+                },
+                error: function (result) {
+                }
+            });
+        }
+
+        function BrandNameSearch() {
+            var BrandName = $("#brandname").val();
+            $.ajax({
+                type: "GET",
+                url: "/Tracking/GetTransactionbyBrandName",
+                data: { BrandName: BrandName },
+                success: function (data) {
+                    $('#tblTracking').DataTable({
+                        destroy: true,
+                        dom: 'Bfrtip',
+                        responsive: true,
+                        "data": data,
+                        "columns": [
+                            { "data": "id" },
+                            { "data": "branchName" },
+                            { "data": "name" },
+                            { "data": "deviceName" },
+                            { "data": "brandName" },
+                            { "data": "serialNumber" },
+                            { "data": "modifiedIssueDate" },
+                            { "data": "typeOfIssue" },
+                            { "data": "modifiedSolutionDateICT" },
+                            { "data": "modifiedServiceCenter" },
+                            { "data": "solutionDetails" },
+                            { "data": "details" }
+                        ],
+                        'columnDefs': [
+                            {
+                                'targets': 11,
+                                'data': null,
+                                'searchable': false,
+                                'orderable': false,
+                                'className': 'dt-body-center',
+                                'defaultContent': '<button class="btn btn-warning">Details</button>',
+                            }
+                        ],
+                        select: {
+                            style: 'single',
+                            selector: 'td:first-child'
+                        },
+                        order: [[0, 'asc']],
+                    });
+                    $('#tblTracking tbody').on('click', 'button', function () {
+                        var row = $(this).closest("tr")[0];
+                        var id = row.cells[0].innerHTML;
+                        var url = "/Tracking/SDetails?Id=" + id;
+                        window.location.href = url;
+                    });
+                },
+                error: function (result) {
+                }
+            });
+        }
+
+        function IssueSearch() {
+            var Issue = $("#ddlissue").val() + ' ,';
+            $.ajax({
+                type: "GET",
+                url: "/Tracking/GetTransactionbyIssue",
+                data: { Issue: Issue },
+                success: function (data) {
+                    $('#tblTracking').DataTable({
+                        destroy: true,
+                        dom: 'Bfrtip',
+                        responsive: true,
+                        "data": data,
+                        "columns": [
+                            { "data": "id" },
+                            { "data": "branchName" },
+                            { "data": "name" },
+                            { "data": "deviceName" },
+                            { "data": "brandName" },
+                            { "data": "serialNumber" },
+                            { "data": "modifiedIssueDate" },
+                            { "data": "typeOfIssue" },
+                            { "data": "modifiedSolutionDateICT" },
+                            { "data": "modifiedServiceCenter" },
+                            { "data": "solutionDetails" },
+                            { "data": "details" }
+                        ],
+                        'columnDefs': [
+                            {
+                                'targets': 11,
+                                'data': null,
+                                'searchable': false,
+                                'orderable': false,
+                                'className': 'dt-body-center',
+                                'defaultContent': '<button class="btn btn-warning">Details</button>',
+                            }
+                        ],
+                        select: {
+                            style: 'single',
+                            selector: 'td:first-child'
+                        },
+                        order: [[0, 'asc']],
+                    });
+                    $('#tblTracking tbody').on('click', 'button', function () {
+                        var row = $(this).closest("tr")[0];
+                        var id = row.cells[0].innerHTML;
+                        var url = "/Tracking/SDetails?Id=" + id;
+                        window.location.href = url;
+                    });
+                },
+                error: function (result) {
+                }
+            });
+        }
+
+        function IssueDateSearch() {
+            var FromDate = $("#fromdate").val();
+            var ToDate = $("#todate").val();
+            $.ajax({
+                type: "GET",
+                url: "/Tracking/GetTransactionbyIssueDate",
+                data: { FromDate: FromDate, ToDate: ToDate },
+                success: function (data) {
+                    $('#tblTracking').DataTable({
+                        destroy: true,
+                        dom: 'Bfrtip',
+                        responsive: true,
+                        "data": data,
+                        "columns": [
+                            { "data": "id" },
+                            { "data": "branchName" },
+                            { "data": "name" },
+                            { "data": "deviceName" },
+                            { "data": "brandName" },
+                            { "data": "serialNumber" },
+                            { "data": "modifiedIssueDate" },
+                            { "data": "typeOfIssue" },
+                            { "data": "modifiedSolutionDateICT" },
+                            { "data": "modifiedServiceCenter" },
+                            { "data": "solutionDetails" },
+                            { "data": "details" }
+                        ],
+                        'columnDefs': [
+                            {
+                                'targets': 11,
+                                'data': null,
+                                'searchable': false,
+                                'orderable': false,
+                                'className': 'dt-body-center',
+                                'defaultContent': '<button class="btn btn-warning">Details</button>',
+                            }
+                        ],
+                        select: {
+                            style: 'single',
+                            selector: 'td:first-child'
+                        },
+                        order: [[0, 'asc']],
+                    });
+                    $('#tblTracking tbody').on('click', 'button', function () {
+                        var row = $(this).closest("tr")[0];
+                        var id = row.cells[0].innerHTML;
+                        var url = "/Tracking/SDetails?Id=" + id;
+                        window.location.href = url;
+                    });
+                },
+                error: function (result) {
+                }
+            });
+        }
+    </script>
+}

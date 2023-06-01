@@ -1,0 +1,1 @@
+D:\visual studion docker test\Tracking1\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache

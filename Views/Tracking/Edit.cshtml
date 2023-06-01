@@ -1,0 +1,428 @@
+﻿@model Transaction
+<div class="ticket_css">
+    <h4 class="">Edit Ticket</h4>
+    <hr />
+    <div class="form-horizontal ">
+        <div class="form-group row">
+            <label class="col-md-2 col-sm-1 control-label">Division</label>
+            <div class="col-md-4 col-sm-12">
+                <select id="ddldivision" class="dropdown form-control" data-allow-clear="1">
+                    <option value="">Choose Division</option>
+                </select>
+            </div>
+            <label class="col-md-2 control-label">Township</label>
+            <div class="col-md-4 col-sm-12">
+                <select id="ddldistrict" class="dropdown form-control">
+                    <option value="">Choose Township</option>
+                </select>
+            </div>
+        </div><br />
+        <div class="form-group row">
+            <label class="col-md-2 col-sm-1 control-label">Unit Code</label>
+            <div class="col-md-4 col-sm-12">
+                <select id="ddlbranch" class="dropdown form-control">
+                    <option value="">Choose Unit</option>
+                </select>
+            </div>
+            <label class="col-md-2 control-label">ICT Person</label>
+            <div class="col-md-4 col-sm-12">
+                <select id="ddlictperson" class="dropdown form-control">
+                    <option value="">Choose ICT Person</option>
+                </select>
+            </div>
+        </div><br />
+        <div class="form-group row">
+            <label class="col-md-2 col-sm-1 control-label">Device Name</label>
+            <div class="col-md-4 col-sm-12">
+                <select id="ddldevicename" class="dropdown form-control">
+                    <option value="">Choose Device</option>
+                </select>
+            </div>
+            <label class="col-md-2 control-label">Brand Name</label>
+            <div class="col-md-4 col-sm-12">
+                <input type="text" id="brandname" class="form-control" placeholder="Type Brand Name" value="@Model.BrandName" />
+            </div>
+        </div><br />
+        <div class="form-group row">
+            <label class="col-md-2 col-sm-1 control-label">Serial Number</label>
+            <div class="col-md-4 col-sm-12">
+                <input type="text" id="serialnumber" class="form-control" placeholder="Type Serial Number" value="@Model.SerialNumber" />
+            </div>
+            <label class="col-md-2 control-label">Issue Date</label>
+            <div class="col-md-4 col-sm-12">
+               @* <input type="date" id="issuedate" class="form-control" value="@Model.IssueDate?.ToString(" yyyy-MM-dd")" />*@
+                @Html.TextBoxFor(model => model.IssueDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date", id = "issuedate"  })
+            </div>
+        </div><br />
+        <div class="form-group row">
+            <label class="col-md-2 col-sm-1 control-label">Types of Issue</label>
+        </div><br />
+        <div class="form-group row">
+            <div class="col-md-3 col-sm-12">
+                <input type="checkbox" id="issue" name="" value="HDD or SSD" />&nbsp;HDD or SSD
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <input type="checkbox" id="issue" name="" value="HDD or SSD Cable" />&nbsp;HDD or SSD Cable
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <input type="checkbox" id="issue" name="" value="RAM" />&nbsp;RAM
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <input type="checkbox" id="issue" name="" value="Ram Slot" />&nbsp;Ram Slot
+            </div>
+        </div><br />
+        <div class="form-group row">
+            <div class="col-md-3 col-sm-12">
+                <input type="checkbox" id="issue" name="" value="Keyboard" />&nbsp;Keyboard
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <input type="checkbox" id="issue" name="" value="Camera" />&nbsp;Camera
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <input type="checkbox" id="issue" name="" value="Mic" />&nbsp;Mic
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <input type="checkbox" id="issue" name="" value="Touch Pad" />&nbsp;Touch Pad
+            </div>
+        </div><br />
+        <div class="form-group row">
+            <div class="col-md-3 col-sm-12">
+                <input type="checkbox" id="issue" name="" value="CPU" />&nbsp;CPU
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <input type="checkbox" id="issue" name="" value="Motherboard" />&nbsp;Motherboard
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <input type="checkbox" id="issue" name="" value="LCD Panel" />&nbsp;LCD Panel
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <input type="checkbox" id="issue" name="" value="LCD Panel Cable" />&nbsp;LCD Panel Cable
+            </div>
+        </div><br />
+        <div class="form-group row">
+            <div class="col-md-3 col-sm-12">
+                <input type="checkbox" id="issue" name="" value="Battery" />&nbsp;Battery
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <input type="checkbox" id="issue" name="" value="Adapter" />&nbsp;Adapter
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <input type="checkbox" id="issue" name="" value="BIOS Error" />&nbsp;BIOS Error
+            </div>
+        </div><br />
+        <label for="">Choose one</label>
+        <div style="border: 1px solid #D3D3D3;padding: 10px; border-radius:3px;">
+            <div class="form-group row">
+                <div class="col-md-6 col-sm-12">
+                    <input type="radio" id="radiodateict" name="solutiondate" value="" />
+                    <label for="">Solution Date by ICT</label>
+                   @* <input type="date" id="sdateICT" class="form-control" style="width:400px;" disabled value="@Model.SolutionDateICT?.ToString(" yyyy-MM-dd")" />*@
+                    @Html.TextBoxFor(model => model.SolutionDateICT, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date", id = "sdateICT" , disabled = "disabled", style = "width:400px;" })
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <input type="radio" id="radiodateservice" name="solutiondate" value="" />
+                    <label for="">Solution Date by Service Center</label>
+                    @*<input type="date" id="sdateServiceCenter" class="form-control" style="width:400px;" disabled value="@Model.SolutionDateServiceCenter?.ToString(" yyyy-MM-dd")" />*@
+                    @Html.TextBoxFor(model => model.SolutionDateServiceCenter, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date", id = "sdateServiceCenter", disabled = "disabled" , style = "width:400px;" })
+                </div>
+            </div><br />
+            <div class="form-group row" id="serviceproviderrow">
+                <div class="col-md-6 col-sm-12"></div>
+                <div class="col-md-6 col-sm-12">
+                    <label for="">Service Provider Name</label>
+                    <select id="ddlserviceprovider" class="dropdown form-control" style="width:400px;">
+                        <option value="">Choose Service Provider</option>
+                    </select>
+                </div>
+            </div><br />
+        </div><br />
+        <div class="form-group row">
+            <div class="col-md-12 col-sm-12">
+                <label for="">Solution Details or Remark</label><br />
+                <textarea class="form-control" rows="5" id="solutiondetails">@Model.SolutionDetails</textarea>
+            </div>
+        </div><br />
+        <div class="form-group row">
+            <div class="col-md-4 col-sm-12"></div>
+            <div class="col-md-3 col-sm-12">
+                <input type="submit" class="btn btn-primary" value="Save" style="width:100%;font-size:18px;" onclick="NewSave()" />
+            </div>
+            <div class="col-md-5 col-sm-12"></div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/select2.css" rel="stylesheet" />
+    <link href="~/css/select2-bootstrap.css" rel="stylesheet" />
+    <script src="~/js/select2.js"></script>
+    <script>
+        $('#ddldivision,#ddldistrict,#ddlbranch,#ddlictperson,#ddldevicename,#ddlbrandname,#ddlserviceprovider').select2({
+            theme: 'bootstrap'
+        });
+
+        var ictperson="", email="", name="", devicename="", brandname="", serviceprovider="";
+        var serialnumber = "", issuedate = "", issue = "", sdateICT = "", sdateServiceCenter = "", solutiondetails = "";
+
+        var DivisionID, DivisionName;
+        var DistrictID, DistrictName;
+        var BranchCode, BranchName;
+
+        //Extract data from Model
+        var id = '@Html.Raw(Model.Id)';
+        var selectDivision, selectDistrict;
+        DivisionID = '@Html.Raw(Model.DivisionID ?? "")';
+        DistrictID = '@Html.Raw(Model.DistrictID ?? "")';
+        BranchCode = '@Html.Raw(Model.BranchCode ?? "")';
+        email = '@Html.Raw(Model.Email ?? "")';
+        devicename = '@Html.Raw(Model.DeviceName ?? "")';
+        serviceprovider = '@Html.Raw(Model.ServiceProviderName ?? "")';
+        var typeofissue = '@Html.Raw(Model.TypeOfIssue ?? "")';
+        
+        var typeofissueArray = typeofissue.split(" , ");
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            var checkboxValue = checkboxes[i].value;
+            if (typeofissueArray.indexOf(checkboxValue) !== -1) {
+                checkboxes[i].checked = true;
+            }
+        }
+
+        //Getting Divisions
+        $.ajax({
+            type: "GET",
+            url: "/Tracking/GetDivisions",
+            data: {},
+            success: function (data) {
+                $.each(data, function (i, d) {
+                    var option = $("<option></option>").val(d.divisionID).html(d.divisionID + ' ' + '|' + ' ' + d.divisionName);
+                    if (d.divisionID == DivisionID) {
+                        option.attr("selected", true);
+                    }
+                    $("#ddldivision").append(option);
+                });
+            }
+        });
+        $.ajax({
+            type: "GET",
+            url: "/Tracking/GetDistricts",
+            data: { selectDivision: DivisionID },
+            success: function (data) {
+                $.each(data, function (i, d) {
+                    var option = $("<option></option>").val(d.districtID).html(d.districtID + ' ' + '|' + ' ' + d.districtName);
+                    if (d.districtID == DistrictID) {
+                        option.attr("selected", true);
+                    }
+                    $("#ddldistrict").append(option);
+                });
+            }
+        });
+        $.ajax({
+            type: "GET",
+            url: "/Tracking/GetBranches",
+            data: { selectDivision: DivisionID, selectDistrict: DistrictID },
+            success: function (data) {
+                $.each(data, function (i, d) {
+                    var option = $("<option></option>").val(d.branchCode).html(d.branchCode + ' ' + '|' + ' ' + d.branchName);
+                    if (d.branchCode == BranchCode) {
+                        option.attr("selected", true);
+                    }
+                    $("#ddlbranch").append(option);
+                });
+            }
+        });
+
+
+        $(document).on("change", "#ddldivision", function () {
+            selectDivision = $("#ddldivision").val();
+
+            //Getting Districts
+            $.ajax({
+                type: "GET",
+                url: "/Tracking/GetDistricts",
+                data: { selectDivision: selectDivision },
+                success: function (data) {
+                    $("#ddldistrict").empty();
+                    $("#ddldistrict").append("<option>Choose Township</option>");
+                    $("#ddlbranch").empty();
+                    $("#ddlbranch").append("<option>Choose Unit</option>");
+
+                    $.each(data, function (i, d) {
+                        $("#ddldistrict").append($("<option></option>").val(d.districtID).html(d.districtID + ' ' + '|' + ' ' + d.districtName));
+                    });
+                }
+            });
+        });
+
+        $(document).on("change", "#ddldistrict", function () {
+            selectDivision = $("#ddldivision").val();
+            selectDistrict = $("#ddldistrict").val();
+
+            //Getting Units
+            $.ajax({
+                type: "GET",
+                url: "/Tracking/GetBranches",
+                data: { selectDivision: selectDivision, selectDistrict: selectDistrict },
+                success: function (data) {
+                    $("#ddlbranch").empty();
+                    $("#ddlbranch").append("<option>Choose Unit</option>");
+
+                    $.each(data, function (i, d) {
+                        $("#ddlbranch").append($("<option></option>").val(d.branchCode).html(d.branchCode + ' ' + '|' + ' ' + d.branchName));
+                    });
+                }
+            });
+        });
+        $(document).on("change", "#ddlbranch", function () {
+            BranchCode = $("#ddlbranch").val();
+        });
+
+         //Getting ICT Persons
+        $.ajax({
+            type: "GET",
+            url: "/Tracking/GetLoginUsers",
+            data: {},
+            success: function (data) {
+                $.each(data, function (i, d) {
+                   var option = $("<option></option>").val(d.email).html(d.firstName + ' ' + d.lastName);
+                    if (d.email == email) {
+                        option.attr("selected", true);
+                    }
+                    $("#ddlictperson").append(option);
+                });
+            }
+        });
+        $(document).on("change", "#ddlictperson", function () {
+            email = $("#ddlictperson").val();
+            name = $('#ddlictperson').find('option:selected').text();
+        });
+
+        //Getting DeviceNames
+        $.ajax({
+            type: "GET",
+            url: "/Tracking/GetDeviceNames",
+            data: {},
+            success: function (data) {
+                $.each(data, function (i, d) {
+                   var option = $("<option></option>").val(d.deviceName).html(d.deviceName);
+                    if (d.deviceName == devicename) {
+                        option.attr("selected", true);
+                    }
+                    $("#ddldevicename").append(option);
+                });
+            }
+        });
+        $(document).on("change", "#ddldevicename", function () {
+            devicename = $("#ddldevicename").val();
+        });
+
+        //Getting ServiceProviders
+        $.ajax({
+            type: "GET",
+            url: "/Tracking/GetServiceProviders",
+            data: {},
+            success: function (data) {
+                $.each(data, function (i, d) {
+                    var option = $("<option></option>").val(d.name).html(d.name + ' ' + '|' + d.contactNumber);
+                    if (serviceprovider.includes(d.name)) {
+                        option.attr("selected", true);
+                    }
+                    $("#ddlserviceprovider").append(option);
+                });
+            }
+        });
+        $(document).on("change", "#ddlserviceprovider", function () {
+            serviceprovider = $('#ddlserviceprovider').find('option:selected').text();
+        });
+        $('#serviceproviderrow').hide();
+        $("#radiodateict").click(function () {
+            if ($(this).is(':checked')) {
+                $('#serviceproviderrow').hide();
+                document.getElementById("sdateServiceCenter").disabled = true;
+                document.getElementById("sdateICT").disabled = false;
+            }
+        });
+        $("#radiodateservice").click(function () {
+            if ($(this).is(':checked')) {
+                $('#serviceproviderrow').show();
+                document.getElementById("sdateICT").disabled = true;
+                document.getElementById("sdateServiceCenter").disabled = false;
+            }
+        });
+
+        function NewSave() {
+            DivisionID = $("#ddldivision").val();
+            var selectDivision1 = $('#ddldivision').find('option:selected').text();
+            DivisionName = selectDivision1.slice(6);
+
+            DistrictID = $("#ddldistrict").val();
+            var selectDistrict1 = $('#ddldistrict').find('option:selected').text();
+            DistrictName = selectDistrict1.slice(6);
+
+            BranchCode = $("#ddlbranch").val();
+            var selectBranch1 = $('#ddlbranch').find('option:selected').text();
+            BranchName = selectBranch1.slice(7);
+
+            email = $("#ddlictperson").val();
+            name = $('#ddlictperson').find('option:selected').text();
+
+            brandname = $("#ddldevicename").val();
+            brandname = $("#brandname").val();
+            serialnumber = $("#serialnumber").val();
+            issuedate = $("#issuedate").val();
+            sdateICT = $("#sdateICT").val();
+            sdateServiceCenter = $("#sdateServiceCenter").val();
+            solutiondetails = $("#solutiondetails").val();
+            var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+            issue = "";
+            for (var i = 0; i < checkboxes.length; i++) {
+                issue += checkboxes[i].value + ' , ';
+            }
+
+            if (DivisionID == "" || DistrictID == "" || BranchCode == "" || email == "" || devicename == "" || brandname == "" || serialnumber == "" || issuedate == "" || issue == "" || solutiondetails == "") {
+                alert("User must fill all of these data!!");
+            }
+            else {
+                var data = {
+                    Id: id,
+                    DivisionID: DivisionID,
+                    DivisionName: DivisionName,
+                    DistrictID: DistrictID,
+                    DistrictName: DistrictName,
+                    BranchCode: BranchCode,
+                    BranchName: BranchName,
+                    Email: email,
+                    Name: name,
+                    DeviceName: devicename,
+                    BrandName: brandname,
+                    SerialNumber: serialnumber,
+                    IssueDate: issuedate,
+                    TypeOfIssue: issue,
+                    SolutionDateICT: sdateICT,
+                    SolutionDateServiceCenter: sdateServiceCenter,
+                    ServiceProviderName: serviceprovider,
+                    SolutionDetails: solutiondetails
+                };
+               
+                $.ajax({
+                    type: 'POST',
+                    url: '/Tracking/NewSave',
+                    data: data,
+                    dataType: "json",
+                    success: function (data) {
+                        try {
+                            if (data.data == 1) {
+                                alert("Successfully Updated!");
+                            }
+                            else if (data.data == 0) {
+                                alert("User must fill all of these data!!");
+                            }
+                        } catch (e) {
+                            console.log("Error in success function:", e);
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+}

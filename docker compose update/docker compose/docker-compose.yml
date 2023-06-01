@@ -1,0 +1,18 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  tracking:
+    image: zawzawaung/tracking:V1.0.0
+    container_name: tracking_web_application
+    ports:
+      - "5000:80"
+    depends_on:
+      - sql
+  sql:
+    image: "zawzawaung/mssql.2022:V1.0.0"
+    container_name: sql_server2022
+    ports: # not actually needed, because the two services are on the same network
+      - "1433:1433" 
+    environment:
+      - ACCEPT_EULA=y
+      - SA_PASSWORD=P@ssw0rd10
+    

@@ -1,0 +1,20 @@
+﻿.ticket_css {
+    border: 1px solid groove;
+   /* background-color: lavender;*/
+    padding: 15px;
+    border-radius: 3px;
+}
+
+.ticket_css select option{
+    font-size:14px;
+}
+
+.ticket_css #ddldivision option {
+    font-size: 14px;
+}
+
+.ticket_css label
+{
+    font-weight: bold;
+}
+
